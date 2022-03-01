@@ -1,0 +1,16 @@
+<center>
+
+<table> 
+  <th>Name</th>
+  <th>Quantity</th>
+  <th colspan=3>Actions</th>
+  <tr>  
+    <td><%= @order.product.name %></td>
+    <td><%= @order.quantity %></td>
+    <td><%= button_to "Edit", edit_admin_product_order_path(@product, @order), method: :get %></td>
+    <td><%= button_to "Delete", admin_product_order_path(@product, @order), method: :delete %></td>
+    <td><%= button_to "Back", admin_product_orders_path(@product), method: :get %></td>
+  </tr>
+</table>
+
+</center>

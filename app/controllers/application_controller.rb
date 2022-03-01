@@ -5,7 +5,15 @@ class ApplicationController < ActionController::Base
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:role])
-
     devise_parameter_sanitizer.permit(:account_update, keys: [:role])
+  end
+
+  private
+
+  def auth_admin
+    if user_signed_in? && current_user.role == "Merchant"
+      flash[:notice] = "Only Admin can edit or add Products"
+      redirect_to root_path
+    end
   end
 end

@@ -1,6 +1,6 @@
 <h2>Create a Order</h2>
 
-<%= form_with(model: [@product, @order], local: true) do |form| %>
+<%= form_with(model: [:admin, @product, @order], local: true) do |form| %>
 
 <div>
   <%= form.label :Quantity %><br>

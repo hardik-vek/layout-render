@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-class OrdersController < ApplicationController
+class Admin::OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :get_product
   before_action :find_order, only: [:show, :edit, :update, :destroy]
@@ -21,7 +21,7 @@ class OrdersController < ApplicationController
     @order = @product.orders.build(create_orders)
     if @order.save
       flash[:notice] = "Order has been successfully created......"
-      redirect_to product_orders_path(@product)
+      redirect_to admin_product_orders_path(@product)
     else
       render :new, status: :unprocessable_entity
     end
@@ -33,7 +33,7 @@ class OrdersController < ApplicationController
   def update
     if @order.update(create_orders)
       flash[:notice] = "Order has been successfully edited......."
-      redirect_to product_orders_path(@product)
+      redirect_to admin_product_orders_path(@product)
     else
       render :edit, status: :unprocessable_entity
     end
@@ -41,7 +41,7 @@ class OrdersController < ApplicationController
 
   def destroy
     @order.destroy
-    redirect_to product_orders_path(@product)
+    redirect_to admin_product_orders_path(@product)
   end
 
   private

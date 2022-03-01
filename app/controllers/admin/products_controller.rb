@@ -1,5 +1,6 @@
 # frozen_string_literal: true
-class ProductsController < ApplicationController
+class Admin::ProductsController < ApplicationController
+  before_action :auth_admin, except: [:show]
   before_action :authenticate_user!
   before_action :find_product, only: [:show, :edit, :update, :destroy]
 
@@ -18,7 +19,7 @@ class ProductsController < ApplicationController
     @product = Product.new(create_products)
     if @product.save
       flash[:notice] = "Product has been successfully created......"
-      redirect_to products_path
+      redirect_to admin_products_path
     else
       render :new, status: :unprocessable_entity
     end
@@ -30,7 +31,7 @@ class ProductsController < ApplicationController
   def update
     if @product = Product.update(create_products)
       flash[:notice] = "Product has been successfully edited......."
-      redirect_to products_path
+      redirect_to admin_products_path
     else
       render :edit, status: :unprocessable_entity
     end
@@ -38,7 +39,7 @@ class ProductsController < ApplicationController
 
   def destroy
     @product.destroy
-    redirect_to products_path
+    redirect_to admin_products_path
   end
 
   private
